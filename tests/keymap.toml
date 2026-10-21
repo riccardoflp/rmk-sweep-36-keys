@@ -1,0 +1,162 @@
+# Keymap scenarios for the Sweep36 port. Run them with scripts/test_keymap.sh.
+keyboard = "boards/sweep36.toml"
+
+[[test]]
+name = "hrm_tap"
+steps = [{ tap = { pos = [1, 3], duration = 50 } }, { delay = 300 }]
+expect = [["F"], []]
+
+[[test]]
+name = "hrm_hold"
+steps = [
+  { press = [1, 3] },
+  { delay = 250 },
+  { tap = { pos = [1, 5], duration = 20 } },
+  { release = [1, 3] },
+]
+expect = [["LShift"], ["LShift", "H"], ["LShift"], []]
+
+[[test]]
+name = "hrm_roll_is_tap"
+steps = [
+  { press = [1, 3] },
+  { delay = 40 },
+  { press = [1, 5] },
+  { delay = 40 },
+  { release = [1, 3] },
+  { delay = 20 },
+  { release = [1, 5] },
+  { delay = 300 },
+]
+expect = [["F"], [], ["H"], []]
+
+[[test]]
+name = "hrm_quick_tap_repeats"
+steps = [
+  { tap = { pos = [1, 3], duration = 30 } },
+  { delay = 60 },
+  { press = [1, 3] },
+  { delay = 400 },
+  { release = [1, 3] },
+]
+expect = [["F"], [], ["F"], []]
+
+[[test]]
+name = "thumb_tap_sends_tab"
+steps = [{ tap = { pos = [3, 4], duration = 50 } }, { delay = 300 }]
+expect = [["Tab"], []]
+
+[[test]]
+name = "thumb_hold_nav_up"
+steps = [
+  { press = [3, 4] },
+  { delay = 250 },
+  { tap = { pos = [0, 2], duration = 20 } },
+  { release = [3, 4] },
+]
+expect = [["Up"], []]
+
+[[test]]
+name = "capsword_combo_base"
+steps = [
+  { press = [1, 3] },
+  { delay = 10 },
+  { press = [1, 6] },
+  { delay = 20 },
+  { release = [1, 3] },
+  { release = [1, 6] },
+  { tap = { pos = [2, 4], duration = 20 } },
+  { tap = { pos = [3, 3], duration = 20 } },
+  { tap = { pos = [2, 4], duration = 20 } },
+]
+expect = [["LShift", "B"], [], ["Space"], [], ["B"], []]
+
+[[test]]
+name = "capsword_combo_nav"
+steps = [
+  { press = [3, 4] },
+  { delay = 250 },
+  { press = [1, 3] },
+  { delay = 10 },
+  { press = [1, 6] },
+  { delay = 20 },
+  { release = [1, 3] },
+  { release = [1, 6] },
+  { release = [3, 4] },
+  { tap = { pos = [2, 4], duration = 20 } },
+]
+expect = [["LShift", "B"], []]
+
+[[test]]
+name = "num_sqm_macro"
+steps = [
+  { press = [3, 5] },
+  { delay = 250 },
+  { tap = { pos = [0, 2], duration = 20 } },
+  { release = [3, 5] },
+]
+expect = [["Quote"], [], ["Space"], [], []]
+
+[[test]]
+name = "num_dqm_macro"
+steps = [
+  { press = [3, 5] },
+  { delay = 250 },
+  { tap = { pos = [0, 3], duration = 20 } },
+  { release = [3, 5] },
+]
+expect = [["LShift", "Quote"], ["LShift"], ["Space"], [], []]
+
+[[test]]
+name = "nav_lca_tab_macro"
+steps = [
+  { press = [3, 4] },
+  { delay = 250 },
+  { tap = { pos = [1, 0], duration = 20 } },
+  { release = [3, 4] },
+]
+expect = [["LCtrl"], ["LCtrl", "LAlt"], ["LCtrl", "LAlt", "Tab"], ["LCtrl", "LAlt"], ["LCtrl"], []]
+
+[[test]]
+name = "sym_shifted_paren"
+steps = [
+  { press = [3, 6] },
+  { delay = 250 },
+  { tap = { pos = [1, 6], duration = 20 } },
+  { release = [3, 6] },
+]
+expect = [["LShift", "Kc9"], []]
+
+[[test]]
+name = "mouse_left_click"
+steps = [
+  { press = [3, 7] },
+  { delay = 250 },
+  { tap = { pos = [0, 3], duration = 20 } },
+  { release = [3, 7] },
+]
+expect = [{ mouse = { buttons = 1 } }, { mouse = {} }]
+
+[[test]]
+name = "p_tap_sends_p"
+steps = [{ tap = { pos = [0, 9], duration = 50 } }, { delay = 300 }]
+expect = [["P"], []]
+
+[[test]]
+name = "hrm_same_hand_nested_is_tap"
+steps = [
+  { press = [1, 3] },
+  { tap = { pos = [1, 4], duration = 20 } },
+  { release = [1, 3] },
+  { delay = 300 },
+]
+expect = [["F"], ["F", "G"], ["F"], []]
+
+[[test]]
+name = "hrm_opposite_hand_nested_is_shift"
+steps = [
+  { press = [1, 3] },
+  { tap = { pos = [1, 5], duration = 20 } },
+  { release = [1, 3] },
+]
+expect = [["LShift"], ["LShift", "H"], ["LShift"], []]

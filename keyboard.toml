@@ -1,0 +1,226 @@
+# Sweep36 (nice!nano v2) — RMK port of the ZMK config at
+# https://github.com/riccardoflp/swweeep_36
+
+[keyboard]
+name = "Sweep36"
+product_name = "Sweep36"
+vendor_id = 0x4c4b
+product_id = 0x4643
+manufacturer = "Riccardo Filippozzi"
+# The preset sets the chip, USB, storage and the VDDH battery measurement.
+board = "nice!nano_v2"
+
+[rmk]
+# ZMK: &bt BT_SEL 0..3
+ble_profiles_num = 4
+# ZMK: CONFIG_ZMK_IDLE_SLEEP_TIMEOUT=3600000
+split_central_sleep_timeout_seconds = 3600
+# ZMK debounces direct-pin switches for 5 ms
+debounce_time = 5
+# ZMK raised pointer speed from 600 to 1500 and scroll from 10 to 20;
+# halving the default intervals (20 ms / 80 ms) gives the same top speeds.
+mouse_key_interval = 10
+mouse_wheel_interval = 40
+
+# Unified 4x10 matrix: the left half is columns 0-4, the right half is
+# columns 5-9, mirrored so column 5 is the right half's inner column.
+# Row 3 holds the thumb keys. The L/R hand markers drive `unilateral_tap`.
+[layout]
+rows = 4
+cols = 10
+map = """
+(0,0,L) (0,1,L) (0,2,L) (0,3,L) (0,4,L) [1] (0,5,R) (0,6,R) (0,7,R) (0,8,R) (0,9,R)
+(1,0,L) (1,1,L) (1,2,L) (1,3,L) (1,4,L) [1] (1,5,R) (1,6,R) (1,7,R) (1,8,R) (1,9,R)
+(2,0,L) (2,1,L) (2,2,L) (2,3,L) (2,4,L) [1] (2,5,R) (2,6,R) (2,7,R) (2,8,R) (2,9,R)
+[2] (3,2,L) (3,3,L) (3,4,L) [1] (3,5,R) (3,6,R) (3,7,R)
+"""
+
+[aliases]
+sqm = "Macro(0)"
+dqm = "Macro(1)"
+bm = "Macro(2)"
+lca_tab = "Macro(3)"
+# BLE profile keys, see https://rmk.rs/docs/features/wireless#multiple-profile-support
+bt0 = "User0"
+bt1 = "User1"
+bt2 = "User2"
+bt3 = "User3"
+bt_next = "User4"
+bt_prev = "User5"
+bt_clear = "User6"
+out_toggle = "User7"
+
+[keymap]
+layers = 7
+
+# ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
+# │Q/ADJ│  W  │  E  │  R  │  T  │   │  Y  │  U  │  I  │  O  │P/ADJ│
+# │A/GUI│S/ALT│D/CTL│F/SFT│  G  │   │  H  │J/SFT│K/CTL│L/ALT│;/GUI│
+# │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │
+# └─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┘
+#             │E/FUN│ SPC │T/NAV│   │E/NUM│B/SYM│D/MOU│
+#             └─────┴─────┴─────┘   └─────┴─────┴─────┘
+[[keymap.layer]]
+name = "base"
+keys = """
+LT(adj, Q, layer_tap)  W                   E                   R                    T                      Y                      U                    I                   O                  LT(adj, P, layer_tap)
+MT(A, LGui, homerow)   MT(S, LAlt, homerow) MT(D, LCtrl, homerow) MT(F, LShift, homerow) G                     H                      MT(J, RShift, homerow) MT(K, RCtrl, homerow) MT(L, LAlt, homerow) MT(Semicolon, RGui, homerow)
+Z                      X                   C                   V                    B                      N                      M                    Comma               Dot                Slash
+LT(func, Escape, layer_tap) Space LT(nav, Tab, layer_tap)      LT(num, Enter, layer_tap) LT(sym, Backspace, layer_tap) LT(mouse, Delete, layer_tap)
+"""
+
+[[keymap.layer]]
+name = "nav"
+keys = """
+Again     Home  Up    End    PageUp       _           CapsLock NumLock Insert _
+@lca_tab  Left  Down  Right  PageDown     Application LShift   LCtrl   LAlt   LGui
+Undo      Cut   Copy  Paste  _            _           _        _       _      _
+_ _ _                                     _ _ _
+"""
+
+[[keymap.layer]]
+name = "mouse"
+keys = """
+Again        MouseBtn2  MouseUp    MouseBtn1   MouseWheelUp       MouseBtn3 MouseBtn1      MouseWheelUp   MouseBtn2       ScrollLock
+PrintScreen  MouseLeft  MouseDown  MouseRight  MouseWheelDown     MouseBtn4 MouseWheelLeft MouseWheelDown MouseWheelRight _
+Undo         Cut        Copy       Paste       _                  MouseBtn5 _              _              _               _
+_ MouseBtn2 MouseBtn1                                             _ _ _
+"""
+
+[[keymap.layer]]
+name = "sym"
+keys = """
+_               Grave            Quote            SHIFTED(Quote)      _                 _              SHIFTED(LeftBracket) SHIFTED(RightBracket) SHIFTED(Kc2)    _
+SHIFTED(Grave)  SHIFTED(Kc7)     SHIFTED(Kc1)     SHIFTED(Backslash)  SHIFTED(Kc5)      SHIFTED(Kc4)   SHIFTED(Kc9)         SHIFTED(Kc0)          SHIFTED(Minus)  SHIFTED(Kc3)
+SHIFTED(Kc6)    SHIFTED(Comma)   SHIFTED(Dot)     Equal               _                 _              LeftBracket          RightBracket          _               _
+_ _ _                                                                                   _ _ _
+"""
+
+# ZMK's C_PAUSE has no RMK keycode; MediaPlayPause takes its place.
+[[keymap.layer]]
+name = "func"
+keys = """
+_     MediaRewind     MediaPlayPause MediaFastForward AudioVolUp      _ F7 F8 F9 F10
+LGui  LAlt            LCtrl          LShift           AudioVolDown    _ F4 F5 F6 F11
+_     MediaPrevTrack  MediaPlayPause MediaNextTrack   AudioMute       _ F1 F2 F3 F12
+_ _ _                                                                 _ _ _
+"""
+
+[[keymap.layer]]
+name = "num"
+keys = """
+_          @bm            @sqm      @dqm            _                _    Kc7 Kc8 Kc9 Comma
+Slash      SHIFTED(Kc8)   Minus     SHIFTED(Equal)  SHIFTED(Kc5)     Kc0  Kc4 Kc5 Kc6 Equal
+Backslash  SHIFTED(Comma) SHIFTED(Dot) Equal        _                Kc0  Kc1 Kc2 Kc3 Dot
+_ _ _                                                                _ _ _
+"""
+
+# ClearEeprom sits under Q, so it needs P held: it erases the left half's
+# storage (Vial edits and BLE bonds) and reboots it.
+# ZMK's &ext_power keys have no RMK counterpart (the Sweep powers nothing
+# through VCC), and RMK switches output with a single toggle instead of
+# separate USB/BLE keys.
+[[keymap.layer]]
+name = "adj"
+keys = """
+ClearEeprom _ _ _ Bootloader      Bootloader @bt_prev @bt_next _    _
+_           _ _ _ _               @bt_clear  @bt0     @bt1     @bt2 @bt3
+_           _ _ _ _               No         No       No       @out_toggle @out_toggle
+@out_toggle @out_toggle _         _ _ _
+"""
+
+# Timings match ZMK's `&lt` and `&hr` (tapping-term 200 ms, quick-tap 150 ms).
+# ZMK used tap-preferred, but RMK's equivalent (normal mode) lets keys pressed
+# during the decision overtake the tap-hold key, so a fast F-H roll types "hf".
+# Permissive hold keeps them in order.
+[behavior.morse.profiles]
+layer_tap = { permissive_hold = true, hold_timeout = "200ms", quick_tap_timeout = "150ms" }
+# A same-hand key tapped while a home-row mod is held stays a tap, as in ZMK;
+# an opposite-hand key applies the modifier without waiting for the timeout.
+homerow = { permissive_hold = true, unilateral_tap = true, hold_timeout = "200ms", quick_tap_timeout = "150ms" }
+
+# ZMK `combo_capsword`: F+J (key positions 13 and 16) on every layer but ADJ.
+# RMK matches combos by action, so each layer lists the actions at those positions.
+[behavior.combo]
+timeout = "50ms"
+combos = [
+  { actions = ["MT(F, LShift, homerow)", "MT(J, RShift, homerow)"], output = "CapsWordToggle", layer = 0 },
+  { actions = ["Right", "LShift"], output = "CapsWordToggle", layer = 1 },
+  { actions = ["MouseRight", "MouseWheelLeft"], output = "CapsWordToggle", layer = 2 },
+  { actions = ["SHIFTED(Backslash)", "SHIFTED(Kc9)"], output = "CapsWordToggle", layer = 3 },
+  { actions = ["LShift", "F4"], output = "CapsWordToggle", layer = 4 },
+  { actions = ["SHIFTED(Equal)", "Kc4"], output = "CapsWordToggle", layer = 5 },
+]
+
+# Macro order matters: `Macro(n)` refers to the n-th entry (see [aliases]).
+# sqm/dqm/bm type the character followed by a space, so a dead key on an
+# international layout prints the bare character.
+[[behavior.macro.macros]]
+operations = [{ operation = "text", text = "' " }]
+
+[[behavior.macro.macros]]
+operations = [{ operation = "text", text = "\" " }]
+
+[[behavior.macro.macros]]
+operations = [{ operation = "text", text = "` " }]
+
+[[behavior.macro.macros]]
+operations = [
+  { operation = "down", keycode = "LCtrl" },
+  { operation = "down", keycode = "LAlt" },
+  { operation = "tap", keycode = "Tab" },
+  { operation = "up", keycode = "LAlt" },
+  { operation = "up", keycode = "LCtrl" },
+]
+
+[ble]
+enabled = true
+
+[split]
+connection = "ble"
+
+# Left half. Pins follow the ZMK shield (swweeep.dtsi) through the
+# nice!nano pro-micro pin map.
+[split.central]
+rows = 4
+cols = 5
+row_offset = 0
+col_offset = 0
+ble_addr = [0x3d, 0x91, 0x5a, 0x27, 0xb4, 0xd6]
+
+[split.central.matrix]
+matrix_type = "direct_pin"
+direct_pin_low_active = true
+direct_pins = [
+    ["P0_08", "P0_22", "P0_24", "P1_00", "P0_11"],
+    ["P1_04", "P1_06", "P1_01", "P1_02", "P1_07"],
+    ["P0_09", "P0_10", "P1_11", "P1_13", "P1_15"],
+    ["_",     "_",     "P0_31", "P0_29", "P0_02"],
+]
+
+[split.central.battery]
+battery_adc_pin = "vddh"
+battery_user_description = "Left"
+
+# Right half: the same PCB flipped, so its columns run inner to outer and
+# use the left half's pins in reverse order.
+[[split.peripheral]]
+rows = 4
+cols = 5
+row_offset = 0
+col_offset = 5
+ble_addr = [0x82, 0x4e, 0x1f, 0xc3, 0x6a, 0xe8]
+
+[split.peripheral.matrix]
+matrix_type = "direct_pin"
+direct_pin_low_active = true
+direct_pins = [
+    ["P0_11", "P1_00", "P0_24", "P0_22", "P0_08"],
+    ["P1_07", "P1_02", "P1_01", "P1_06", "P1_04"],
+    ["P1_15", "P1_13", "P1_11", "P0_10", "P0_09"],
+    ["P0_02", "P0_29", "P0_31", "_",     "_"],
+]
+
+[split.peripheral.battery]
+battery_adc_pin = "vddh"
+battery_user_description = "Right"
