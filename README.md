@@ -8,7 +8,7 @@ The left half is the central: it connects to the host over USB or BLE. The right
 
 - Rust stable with the `thumbv7em-none-eabihf` target (`rust-toolchain.toml` installs it)
 - [Arm GNU toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads), with `arm-none-eabi-gcc` on `PATH`. RMK uses it to build the P-256 assembly for BLE pairing.
-- A checkout of RMK next to this folder, at `../rmk`
+- A checkout of RMK next to this folder, at `../rmk`. It must include commit `e37f3c5` ("fix(mouse): send a positive wheel value for MouseWheelUp", branch `fix/mouse-wheel-up-sign` until it is merged). Without it, the scroll keys scroll in the wrong direction.
 - `cargo-make`, `flip-link`, `cargo-binutils` and `cargo-hex-to-uf2`:
 
   ```bash
@@ -66,13 +66,26 @@ If the halves stop linking, the right half still holds the old bond. To reset bo
 
 ## Test the keymap
 
-[`tests/keymap.toml`](tests/keymap.toml) replays key presses through RMK's simulator and checks the reports the host would receive. It covers home-row mods, layer-taps, the Caps Word combo, macros, shifted symbols and mouse keys. Run it after changing `keyboard.toml`:
+The files in [`tests/`](tests) replay key presses through RMK's simulator and check the reports the host would receive:
+
+- [`keymap.toml`](tests/keymap.toml) checks tap-hold timing: home-row mods, layer-taps, rolls, quick-tap and the Caps Word combo.
+- [`zmk_parity.toml`](tests/zmk_parity.toml) taps every key on every layer and expects what the ZMK keymap sends. It is generated, so do not edit it by hand.
+
+Run them after changing `keyboard.toml`:
 
 ```bash
 bash scripts/test_keymap.sh
 ```
 
 The script needs [`cargo-nextest`](https://nexte.st/).
+
+To regenerate the parity tests from the ZMK keymap, run:
+
+```bash
+python scripts/gen_zmk_parity.py path/to/swweeep.keymap > tests/zmk_parity.toml
+```
+
+The tests cover keymap logic only. They do not exercise the hardware: pins, BLE pairing, battery reading, sleep and USB still need a check on the real keyboard.
 
 ## Differences from the ZMK config
 
@@ -82,7 +95,7 @@ The script needs [`cargo-nextest`](https://nexte.st/).
   - an opposite-hand key tapped while a home-row mod is held gets the modifier.
 - **Caps Word**: it also continues through Backspace and Delete, types `-` as `_`, and turns off after 5 seconds without typing. In ZMK only `_` and `-` continued it.
 - **`C_PAUSE`**: RMK has no consumer Pause keycode, so the key sends Play/Pause.
-- **`&ext_power`**: RMK has no equivalent. The Sweep powers nothing through VCC, so these keys are `No`.
+- **`K_REDO`**: in RMK the `Again` keycode repeats the last key, so Redo sends Ctrl+Shift+Z.- **`&ext_power`**: RMK has no equivalent. The Sweep powers nothing through VCC, so these keys are `No`.
 - **`&out OUT_USB` / `OUT_BLE`**: RMK has a single USB/BLE toggle, so all four output keys send `Switch Output`.
 - **Mouse keys**: the speed is tuned through `mouse_key_interval` and `mouse_wheel_interval`, so acceleration does not match ZMK exactly.
 - **Sleep**: after an hour idle the keyboard enters BLE idle sleep, not ZMK's deep sleep. Any key wakes it.

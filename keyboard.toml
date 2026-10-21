@@ -49,6 +49,8 @@ bt_next = "User4"
 bt_prev = "User5"
 bt_clear = "User6"
 out_toggle = "User7"
+# RMK's `Again` keycode is a Repeat key, so ZMK's K_REDO becomes a shortcut.
+redo = "WM(Z, LCtrl | LShift)"
 
 [keymap]
 layers = 7
@@ -72,7 +74,7 @@ LT(func, Escape, layer_tap) Space LT(nav, Tab, layer_tap)      LT(num, Enter, la
 [[keymap.layer]]
 name = "nav"
 keys = """
-Again     Home  Up    End    PageUp       _           CapsLock NumLock Insert _
+@redo     Home  Up    End    PageUp       _           CapsLock NumLock Insert _
 @lca_tab  Left  Down  Right  PageDown     Application LShift   LCtrl   LAlt   LGui
 Undo      Cut   Copy  Paste  _            _           _        _       _      _
 _ _ _                                     _ _ _
@@ -81,7 +83,7 @@ _ _ _                                     _ _ _
 [[keymap.layer]]
 name = "mouse"
 keys = """
-Again        MouseBtn2  MouseUp    MouseBtn1   MouseWheelUp       MouseBtn3 MouseBtn1      MouseWheelUp   MouseBtn2       ScrollLock
+@redo        MouseBtn2  MouseUp    MouseBtn1   MouseWheelUp       MouseBtn3 MouseBtn1      MouseWheelUp   MouseBtn2       ScrollLock
 PrintScreen  MouseLeft  MouseDown  MouseRight  MouseWheelDown     MouseBtn4 MouseWheelLeft MouseWheelDown MouseWheelRight _
 Undo         Cut        Copy       Paste       _                  MouseBtn5 _              _              _               _
 _ MouseBtn2 MouseBtn1                                             _ _ _
