@@ -31,7 +31,15 @@ This writes `sweep36-left.uf2` and `sweep36-right.uf2`.
 
 The `Bootloader` key always reboots the **left** half, because the left half processes every key. Flash the right half with a double tap on its reset button.
 
-The firmware is linked at `0x1000`, so it replaces the SoftDevice left by the factory firmware. You can still go back to ZMK by flashing a ZMK `.uf2`.
+The firmware is linked at `0x1000`, so it replaces the SoftDevice left by the factory firmware. A regular ZMK `.uf2` expects that SoftDevice and does not boot afterwards.
+
+### Go back to ZMK
+
+[riccardoflp/swweeep_36](https://github.com/riccardoflp/swweeep_36) also builds ZMK without the SoftDevice reservation. To switch back:
+
+1. Download the `firmware` artifact from the latest successful run in its [Actions tab](https://github.com/riccardoflp/swweeep_36/actions).
+2. Flash `settings_reset-nosd` to each half, to clear the RMK settings.
+3. Flash `swweeep_left-nosd` to the left half and `swweeep_right-nosd` to the right half.
 
 ## Layers
 
@@ -95,7 +103,8 @@ The tests cover keymap logic only. They do not exercise the hardware: pins, BLE 
   - an opposite-hand key tapped while a home-row mod is held gets the modifier.
 - **Caps Word**: it also continues through Backspace and Delete, types `-` as `_`, and turns off after 5 seconds without typing. In ZMK only `_` and `-` continued it.
 - **`C_PAUSE`**: RMK has no consumer Pause keycode, so the key sends Play/Pause.
-- **`K_REDO`**: in RMK the `Again` keycode repeats the last key, so Redo sends Ctrl+Shift+Z.- **`&ext_power`**: RMK has no equivalent. The Sweep powers nothing through VCC, so these keys are `No`.
+- **`K_REDO`**: in RMK the `Again` keycode repeats the last key, so Redo sends Ctrl+Shift+Z.
+- **`&ext_power`**: RMK has no equivalent. The Sweep powers nothing through VCC, so these keys are `No`.
 - **`&out OUT_USB` / `OUT_BLE`**: RMK has a single USB/BLE toggle, so all four output keys send `Switch Output`.
 - **Mouse keys**: the speed is tuned through `mouse_key_interval` and `mouse_wheel_interval`, so acceleration does not match ZMK exactly.
 - **Sleep**: after an hour idle the keyboard enters BLE idle sleep, not ZMK's deep sleep. Any key wakes it.
