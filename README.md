@@ -8,7 +8,7 @@ The left half is the central: it connects to the host over USB or BLE. The right
 
 - Rust stable with the `thumbv7em-none-eabihf` target (`rust-toolchain.toml` installs it)
 - [Arm GNU toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads), with `arm-none-eabi-gcc` on `PATH`. RMK uses it to build the P-256 assembly for BLE pairing.
-- A checkout of RMK next to this folder, at `../rmk`. It must include commit `e37f3c5` ("fix(mouse): send a positive wheel value for MouseWheelUp", branch `fix/mouse-wheel-up-sign` until it is merged). Without it, the scroll keys scroll in the wrong direction.
+- A checkout of RMK `main` next to this folder, at `../rmk`.
 - `cargo-make`, `flip-link`, `cargo-binutils` and `cargo-hex-to-uf2`:
 
   ```bash
@@ -106,5 +106,6 @@ The tests cover keymap logic only. They do not exercise the hardware: pins, BLE 
 - **`K_REDO`**: in RMK the `Again` keycode repeats the last key, so Redo sends Ctrl+Shift+Z.
 - **`&ext_power`**: RMK has no equivalent. The Sweep powers nothing through VCC, so these keys are `No`.
 - **`&out OUT_USB` / `OUT_BLE`**: RMK has a single USB/BLE toggle, so all four output keys send `Switch Output`.
+- **Scroll keys**: RMK sends `MouseWheelUp` as a negative wheel value, which scrolls down, so the keymap swaps `MouseWheelUp` and `MouseWheelDown`. Remove the `scroll_up` and `scroll_down` aliases once RMK fixes the sign, or the keys scroll the wrong way.
 - **Mouse keys**: the speed is tuned through `mouse_key_interval` and `mouse_wheel_interval`, so acceleration does not match ZMK exactly.
 - **Sleep**: after an hour idle the keyboard enters BLE idle sleep, not ZMK's deep sleep. Any key wakes it.
