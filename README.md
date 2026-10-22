@@ -4,6 +4,8 @@
 
 The left half is the central: it connects to the host over USB or BLE. The right half is the peripheral: it only talks to the left half.
 
+![Sweep36 keymap](keymap-drawer/sweep36.svg)
+
 ## Prerequisites
 
 - Rust stable with the `thumbv7em-none-eabihf` target (`rust-toolchain.toml` installs it)
@@ -94,6 +96,20 @@ python scripts/gen_zmk_parity.py path/to/swweeep.keymap > tests/zmk_parity.toml
 ```
 
 The tests cover keymap logic only. They do not exercise the hardware: pins, BLE pairing, battery reading, sleep and USB still need a check on the real keyboard.
+
+## Redraw the keymap image
+
+[`keymap-drawer/sweep36.svg`](keymap-drawer/sweep36.svg) is drawn with [keymap-drawer](https://github.com/caksoylar/keymap-drawer). keymap-drawer cannot read `keyboard.toml`, so [`scripts/draw_keymap.py`](scripts/draw_keymap.py) converts it first. The key positions are in [`keymap-drawer/sweep36_layout.json`](keymap-drawer/sweep36_layout.json) and the colors in [`keymap_drawer_config.yaml`](keymap_drawer_config.yaml).
+
+A GitHub Action redraws the image on every push that changes these files. To redraw it locally:
+
+```bash
+pip install keymap-drawer==0.23.0
+python scripts/draw_keymap.py > keymap-drawer/sweep36.json
+keymap -c keymap_drawer_config.yaml draw keymap-drawer/sweep36.json -o keymap-drawer/sweep36.svg
+```
+
+When you add a keycode or alias to `keyboard.toml`, give it a legend in `scripts/draw_keymap.py`, or the script stops with a `KeyError`.
 
 ## Differences from the ZMK config
 

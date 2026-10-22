@@ -1,0 +1,575 @@
+{
+ "layout": {
+  "qmk_info_json": "keymap-drawer/sweep36_layout.json"
+ },
+ "layers": {
+  "base": [
+   {
+    "t": "Q",
+    "h": "adj"
+   },
+   "W",
+   "E",
+   "R",
+   "T",
+   "Y",
+   "U",
+   "I",
+   "O",
+   {
+    "t": "P",
+    "h": "adj"
+   },
+   {
+    "t": "A",
+    "h": "⌘"
+   },
+   {
+    "t": "S",
+    "h": "⌥"
+   },
+   {
+    "t": "D",
+    "h": "CTRL"
+   },
+   {
+    "t": "F",
+    "h": "⇧"
+   },
+   "G",
+   "H",
+   {
+    "t": "J",
+    "h": "⇧"
+   },
+   {
+    "t": "K",
+    "h": "CTRL"
+   },
+   {
+    "t": "L",
+    "h": "⌥"
+   },
+   {
+    "t": ";",
+    "h": "⌘"
+   },
+   "Z",
+   "X",
+   "C",
+   "V",
+   "B",
+   "N",
+   "M",
+   ",",
+   ".",
+   "/",
+   {
+    "t": "ESC",
+    "h": "func"
+   },
+   "␣",
+   {
+    "t": "⭾",
+    "h": "nav"
+   },
+   {
+    "t": "⏎",
+    "h": "num"
+   },
+   {
+    "t": "⌫",
+    "h": "sym"
+   },
+   {
+    "t": "⌦",
+    "h": "mouse"
+   }
+  ],
+  "nav": [
+   "↷",
+   "HOME",
+   "▲",
+   "END",
+   "PAG▲",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "🄰 CAPS",
+   "NUM",
+   "⎀INS",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "CTRL+ ⌥+⭾",
+   "◀",
+   "▼",
+   "▶",
+   "PAG▼",
+   "☰",
+   "⇧",
+   "CTRL",
+   "⌥",
+   "⌘",
+   "↶",
+   "✂",
+   "COPY",
+   "PASTE",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "type": "held"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   }
+  ],
+  "mouse": [
+   "↷",
+   "RIGHT CLICK",
+   "▲ MOUSE",
+   "LEFT CLICK",
+   "△ SCROLL",
+   "MIDDLE CLICK",
+   "LEFT CLICK",
+   "△ SCROLL",
+   "RIGHT CLICK",
+   "SCROLL LOCK",
+   "⎙",
+   "◀ MOUSE",
+   "▼ MOUSE",
+   "▶ MOUSE",
+   "▽ SCROLL",
+   "⎗",
+   "◁ SCROLL",
+   "▽ SCROLL",
+   "▷ SCROLL",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "↶",
+   "✂",
+   "COPY",
+   "PASTE",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "⎘",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "RIGHT CLICK",
+   "LEFT CLICK",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "type": "held"
+   }
+  ],
+  "sym": [
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "` INTL.",
+   "' INTL.",
+   "\" INTL.",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "{",
+   "}",
+   "@",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "~ INTL.",
+   "&",
+   "!",
+   "|",
+   "%",
+   "$",
+   "(",
+   ")",
+   "_",
+   "#",
+   "^ INTL.",
+   "<",
+   ">",
+   "=",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "[",
+   "]",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "type": "held"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   }
+  ],
+  "func": [
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "REWIND",
+   "⏯",
+   "FAST FORW",
+   "🕪",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "F7",
+   "F8",
+   "F9",
+   "F10",
+   "⌘",
+   "⌥",
+   "CTRL",
+   "⇧",
+   "🕩",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "F4",
+   "F5",
+   "F6",
+   "F11",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "⏮",
+   "⏯",
+   "⏭",
+   "🕨",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "F1",
+   "F2",
+   "F3",
+   "F12",
+   {
+    "type": "held"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   }
+  ],
+  "num": [
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "`",
+   "'",
+   "\"",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "7",
+   "8",
+   "9",
+   ",",
+   "/",
+   "*",
+   "-",
+   "+",
+   "%",
+   "0",
+   "4",
+   "5",
+   "6",
+   "=",
+   "\\",
+   "<",
+   ">",
+   "=",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "0",
+   "1",
+   "2",
+   "3",
+   ".",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "type": "held"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   }
+  ],
+  "adj": [
+   "CLR EEPROM",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "BOOT",
+   "BOOT",
+   "BT PRV",
+   "BT NXT",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "type": "held"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "BT CLR",
+   {
+    "t": "BT",
+    "h": "0"
+   },
+   {
+    "t": "BT",
+    "h": "1"
+   },
+   {
+    "t": "BT",
+    "h": "2"
+   },
+   {
+    "t": "BT",
+    "h": "3"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   "",
+   "",
+   "",
+   "USB/BLE",
+   "USB/BLE",
+   "USB/BLE",
+   "USB/BLE",
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   },
+   {
+    "t": "▽",
+    "type": "trans"
+   }
+  ]
+ },
+ "combos": [
+  {
+   "p": [
+    13,
+    16
+   ],
+   "k": "CAPS WORD",
+   "l": [
+    "base",
+    "nav",
+    "mouse",
+    "sym",
+    "func",
+    "num"
+   ]
+  }
+ ]
+}

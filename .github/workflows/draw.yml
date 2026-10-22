@@ -1,0 +1,32 @@
+# Redraws keymap-drawer/sweep36.svg when the keymap or its drawing inputs change
+name: Draw keymap
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "keyboard.toml"
+      - "keymap_drawer_config.yaml"
+      - "keymap-drawer/sweep36_layout.json"
+      - "scripts/draw_keymap.py"
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install keymap-drawer==0.23.0
+      - run: python scripts/draw_keymap.py > keymap-drawer/sweep36.json
+      - run: keymap -c keymap_drawer_config.yaml draw keymap-drawer/sweep36.json -o keymap-drawer/sweep36.svg
+      - name: Commit the drawing if it changed
+        run: |
+          git add keymap-drawer
+          git diff --cached --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Redraw keymap"
+          git push
